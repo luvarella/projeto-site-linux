@@ -1,0 +1,23 @@
+create table paciente (
+email VARCHAR(50) NOT NULL,
+nome VARCHAR(150) NOT NULL,
+cpf CHAR(11) NOT NULL,
+senha VARCHAR(20) NOT NULL,
+telefone VARCHAR(15),
+dt_nasc DATE NOT NULL,
+PRIMARY KEY (cpf),
+UNIQUE (email)
+);
+create table medico (
+cpf CHAR(11) NOT NULL,
+nome VARCHAR(150) NOT NULL,
+especialidade VARCHAR(300) NOT NULL,
+PRIMARY KEY (cpf)
+);
+create table agendamento (
+cpf_paciente CHAR(11) NOT NULL,   cpf_medico CHAR(11) NOT NULL,
+data_hora_consulta DATE NOT NULL,   data_hora_agendamento DATE NOT NULL,
+PRIMARY KEY (data_hora_consulta, cpf_paciente, cpf_medico),
+FOREIGN KEY (cpf_paciente) REFERENCES paciente(cpf),
+FOREIGN KEY (cpf_medico) REFERENCES medico(cpf)
+)
