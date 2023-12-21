@@ -1,0 +1,34 @@
+#dados{
+  display: flex;
+  justify-content: center;
+  gap: 6em;
+
+}
+
+.linetitle{
+  width: 412px;
+  height: 44px;
+}
+
+#title{
+  display: flex;
+  justify-content: center;
+}
+
+#botarconsulta{
+  width: 192px;
+  height: 40px;
+  font-size: 17px;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
+#botarconsulta:hover{
+  text-decoration-color: #F1785B;
+}

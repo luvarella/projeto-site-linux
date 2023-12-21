@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Saúde Mais - Admin</title>
+  <link href="css/style.css" rel="stylesheet"/>
+  <link href="css/index.css" rel="stylesheet"/>
+  <link href="css/cadastro.css" rel="stylesheet"/>
+  <link href="css/agendamento.css" rel="stylesheet"/>
+  <link href="css/dados.css" rel="stylesheet"/>
+   <link href="css/deletar.css" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap" rel="stylesheet">
+   <script src="js/abrirfechar.js"> </script>
+</head>
+<body>
+  <div id="esmaecer"></div>
+  <header>
+    <figure class = "logo">
+        <a href="index.html"><img src="img/logo.png" alt="logotipo do Saúde Mais"/></a>
+    </figure>
+    <nav id = "menu">
+        <ul>
+          <li><a href = "index.html">Início</a></li>
+          <li><a href = "agendamento.html">Agendar</a></li>
+          <li><a href = "consultas.html">Ver Consultas</a></li>
+        </ul>
+        </nav>
+  </header>
+<main>
+  <section id = "dados">
+    <h2>Dados da consulta</h2>
+    <div class = "dados">
+      <h4>CPF do paciente:</h4>
+      <p>{Resposta}</p>
+      <h4>CPF do médico:</h4>
+      <p>{Resposta}</p>
+      <h4>Data da consulta:</h4>
+      <p>{Resposta}</p>
+      <h4>Hora da consulta:</h4>
+      <p>{Resposta}</p>
+    </div>
+  </section>
+  <section>
+    <figure class="img">
+      <img src="img/img6.png" alt="figura ilustrativa de um médico."/>
+    </figure>
+    <div class = "botao" >
+    <a href = "alterardados.html">
+    <input id="enviar" type="submit" value="Alterar Dados" style="margin-bottom: 0;"/>
+    </a>
+    </div>
+    <div class = "botao">
+    <a href="javascript:deletarconta()"><input id="enviar" type="submit" value="Deletar conta"/></a>
+    <!-- <a href = "javascript:deletarconta()">
+    <input id="enviar" type="submit" value="Deletar conta" />
+    </a> -->
+    </div>
+  </section>
+</main>
+<section id="deletar">
+ <div>
+    <h4 style = "text-align: center;">Tem certeza que deseja apagar esta consulta?</h4>
+    <p style = "text-align: center; width: 363px; margin: 0 auto; margin-top: 15px;">Não será possível a recuperação dos seus dados após esta operação.</p>
+   <!-- <h3><a href="javascript:fechar()">x</a></h3> -->
+      <div class="botaodeletar">
+        <div>
+        <a href = "index.html">
+        <input type="submit" value="Continuar" id="botao1"/>
+        </a>
+        </div>
+        <div>
+        <a href="javascript:fechar()">
+        <input type="submit"  value="Cancelar" id="botao2" />
+        </a>
+        </div>
+      </div>
+
+</section>
+<footer>
+  <address>Trabalho de ICS realizado por Jordson Albino, Lielly Natally, Luiza Varella, Pedro Vítor e Renan Balbino.</address>
+</footer>
+</body>
+
+</html>
