@@ -1,0 +1,29 @@
+main{
+  display: flex;
+  justify-content: center;
+}
+
+h1{
+  font-family: 'Assistant', sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.title{
+  color: #0396A6;
+  font-weight: 600;
+}
+
+h2{
+  font-family: 'Assistant', sans-serif;
+  font-size: 41px;
+  font-weight: 400;
+  width:463px;
+  margin-bottom: 20px;
+}
+
+.subtitle{
+  color: #03BFC0;
+  font-weight: 600;
+}
+
