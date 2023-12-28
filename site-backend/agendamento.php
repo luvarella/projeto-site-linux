@@ -50,23 +50,24 @@
       <nav id = "menu">
         <ul>
           <li><a href = "index.html">Início</a></li>
-          <li><a href = "agendamento.html">Agendar</a></li>
-          <li><a href = "consultas.html">Ver Consultas</a></li>
+          <li><a href = "agendamento.php">Agendar</a></li>
+          <li><a href = "consultas.php">Ver Consultas</a></li>
         </ul>
         </nav>
 </header>
 <main>
   <section id = "agendamento">
+<?php include ('conex.php'); ?>
     <h2>Agendar uma consulta</h2>
-    <form action="index.html">
-      <div class = borda>
+    <form method='post' action="agendamento_post.php">
+      <div class = borda>	
         <h4>CPF do paciente:</h4>
-            <input oninput="mascara(this)" id="cpf" placeholder="" required type="text" required="">
-      </div>
-      <div class = borda>
+            <input oninput="mascara(this)" id="cpf_paciente" name="cpf_paciente" placeholder="" required type="text" required="">
+      </div>	
+      <!--<div class = borda>
         <h4>CPF do médico:</h4>
-            <input oninput="mascara(this)" id="cpf" placeholder="" required type="text" required="">
-      </div>
+            <input oninput="mascara(this)" id="cpfmedico" name="cpfmedico" placeholder="" required type="text" required="">
+      </div>-->
       <!-- <div class = borda>
         <h4>E-mail para contato:</h4>
         <input id="email" type="email" name="digitar" id="idigitar" placeholder="" required/>
@@ -81,26 +82,34 @@
           <option value="med">Hospital Soularte</option>
         </select>
       </div> -->
-      <!-- <div class = borda>
+      <div class = borda>
         <h4>Selecione o médico:</h4>
-        <select>
-          <option value=""></option>
+        <select id="cpf_medico" name="cpf_medico">
+	<option value=""></option>
+	<?php 
+	$query = 'SELECT * FROM medico';
+	$result = mysqli_query($db, $query) or die (mysqli_error($db));
+	while ($row = mysqli_fetch_assoc($result)) {
+	echo '<option value="'.$row['cpf'].'">'.$row['nome'].' ('.$row['especialidade'].')</option>';
+	}
+	?>
+	  <!--
           <option value="med">Dr. Jorson Albino (Ortopedia)</option>
           <option value="med">Dra. Lielly Natally (Ginecologia)</option>
           <option value="med">Dra. Luiza Varella (Pediatra)</option>
           <option value="med">Dr. Renan Balbino (Clínico Geral)</option>
-          <option value="med">Dr. Roger Carvalho (Psiquiatria)</option>
+          <option value="med">Dr. Roger Carvalho (Psiquiatria)</option>-->
         </select>
-      </div> -->
+      </div>
       <div class = borda>
         <h4>Selecione o dia da consulta:</h4>
-        <input type="date" id="date" required/>
+        <input type="date" id="dt_consulta" name="dt_consulta" required/>
       </div>
       <!-- <div class = borda>
         <h4>Registre o dia do agendamento:</h4>
-        <input type="date" id="date" required/>
+        <input type="d" id="d" required/>
       </div> -->
-      <div class = borda>
+     <!-- <div class = borda>
         <h4>Selecione a hora da consulta:</h4>
         <select>
           <option value=""></option>
@@ -112,7 +121,7 @@
           <option value="hora">16:30h</option>
           <option value="hora">17:30h</option>
         </select>
-      </div>
+      </div>-->
   </section>
   <section>
     <figure class = "img">

@@ -1,3 +1,26 @@
+<?php
+include ('conex.php');
+
+if(isset($_POST['senha']) && isset($_POST['cpf']))
+{
+$query = "SELECT * FROM paciente WHERE cpf='".$_POST['cpf']."' and senha='".$_POST['senha']. "'";
+}
+else if (isset($_GET['cpf']))
+{
+$query = "SELECT * FROM paciente WHERE cpf='".$_GET['cpf']."'";
+} else die("Erro no login");
+
+$resultado = mysqli_query($db, $query) or die(mysqli_error($db));
+while($obj = mysqli_fetch_assoc($resultado))
+{
+$cpf = $obj['cpf'];
+$nome = $obj['nome'];
+$email = $obj['email'];
+$telefone = $obj['telefone'];
+$dt_nasc = $obj['dt_nasc'];
+$senha = $obj['senha'];
+}
+?>
 <!DOCTYPE html>
 <html lang = "pt-br">
 <head>
@@ -24,27 +47,32 @@
     <nav id = "menu">
         <ul>
           <li><a href = "index.html">Início</a></li>
-          <li><a href = "login.html">Login</a></li>
-          <li><a href = "cadastro.html">Cadastro</a></li>
+          <li><a href = "login.php">Login</a></li>
+          <li><a href = "cadastro.php">Cadastro</a></li>
         </ul>
         </nav>
   </header>
   <main>
     <section id = "dados">
-      <h2>Bem-vindo(a), {nome}</h2>
+      <h2>Bem-vindo(a), <?php echo $nome ?></h2>
       <div class = "dados">
         <h4>Nome Completo:</h4>
-        <p>{Resposta}</p>
+        <p><?php echo $nome ?></p>
         <h4>CPF:</h4>
-        <p>{Resposta}</p>
+        <p><?php echo $cpf ?></p>
         <h4>Telefone:</h4>
-        <p>{Resposta}</p>
+        <p><?php echo $telefone ?></p>
         <h4>E-mail:</h4>
-        <p>{Resposta}</p>
+        <p><?php echo $email ?></p>
         <h4>Data de nascimento:</h4>
-        <p>{Resposta}</p>
+        <p><?php
+	$a = explode("-", $dt_nasc);
+	echo $a[2].'/'.$a[1].'/'.$a[0];
+	?></p>
+        <!--
         <h4>Senha:</h4>
-        <p>{Resposta}</p>
+        <p><?php echo $senha ?></p>
+	-->
       </div>
     </section>
     <section>
@@ -52,7 +80,7 @@
         <img src="img/img5.png" alt="figura ilustrativa de uma pessoa acessando dados privados."/>
       </figure>
       <div class = "botao" >
-      <a href = "alterardados.html">
+      <a href = "editar.php?cpf=<?php echo $cpf ?>">
       <input id="enviar" type="submit" value="Alterar Dados" style="margin-bottom: 0;"/>
       </a>
       </div>
@@ -71,7 +99,7 @@
      <!-- <h3><a href="javascript:fechar()">x</a></h3> -->
         <div class="botaodeletar">
           <div>
-          <a href = "index.html">
+          <a href = "deletar.php?cpf=<?php echo $cpf ?>">
           <input type="submit" value="Continuar" id="botao1"/>
           </a>
           </div>

@@ -1,5 +1,5 @@
 <?php
-require_once '../conexao.php';
+require_once '/var/www/html/saudemais.com.br/conexao.php';
 
 class PacienteDAL {
     private $pdo;

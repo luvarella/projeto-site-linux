@@ -60,13 +60,10 @@
         <img src="img/img3.jpg" alt="figura ilustrativa de um médico"/>
       </figure>
       <?php
-      require_once 'conexao.php';
-      
-      include "dal/PacienteDAL.php";
-      $dao = new PacienteDAL();
-      
+      include 'conex.php';
+           
       ?>
-      <form action="index.html" method="get">
+      <form action="cadastrar_post.php" method="post">
       <div class = "botao">
         <input id="enviar" type="submit" value="Criar perfil"/>
       </div>
@@ -99,9 +96,6 @@
           <input type="password" name="senha" id="senha" required/>
         </div>
       </form>
-      <?php
-        $paciente = $dao->inserir($_GET['nome'], $_GET['cpf'], $_GET['telefone'], $_GET['email'], $_GET['dt_nasc'], $_GET['senha']);
-      ?>
     </section>
 </main>
 <footer>

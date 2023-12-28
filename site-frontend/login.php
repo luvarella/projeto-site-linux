@@ -56,6 +56,7 @@
         </nav>
   </header>
   <main>
+<?php include ('conex.php'); ?>
     <form action="perfil.php" method="post" style = "display: flex;">
     <section class = "login">
       <h2>Acessar seus dados</h2>

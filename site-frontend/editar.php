@@ -1,3 +1,23 @@
+<?php
+include ('conex.php');
+
+if(isset($_GET['cpf']))
+{
+$query = "SELECT * FROM paciente WHERE cpf='".$_GET['cpf']."'";
+}
+else die("Erro de login");
+
+$resultado = mysqli_query($db, $query) or die(mysqli_error($db));
+while($obj = mysqli_fetch_assoc($resultado))
+{
+$cpf = $obj['cpf'];
+$nome = $obj['nome'];
+$email = $obj['email'];
+$telefone = $obj['telefone'];
+$dt_nasc = $obj['dt_nasc'];
+$senha = $obj['senha'];
+}
+?>
 <!DOCTYPE html>
 <html lang = "pt-br">
 <head>
@@ -54,37 +74,37 @@
         </ul>
         </nav>
 </header>
-<main>
+<main> 
     <section id = "cadastro">
-       <form action = "perfil.html">
+       <form action = "editar_post.php" method="post">
       <h2>Editar informações</h2>
         <div class = borda> 
           <h4>Nome Completo:</h4> 
-              <input id="text" type="text" name="digitar" id="idigitar" placeholder="" > 
+              <input id="nome" type="text" name="nome" value="<?php echo $nome ?>" placeholder="" > 
         </div>
-        <div class = borda>
+        <div hidden class = borda>
           <h4>CPF:</h4>
-              <input oninput="mascara(this)" id="cpf" placeholder=""  type="text">
+              <input oninput="mascara(this)" value="<?php echo $_GET['cpf']; ?>" id="cpf" name="cpf" placeholder=""  type="text">
         </div>
         <div class = borda> 
           <h4>Telefone:</h4> 
-              <input id="telefone" type="tel" name="digitar" id="idigitar" placeholder="" onkeyup="handlePhone(event)"/>          
+              <input id="telefone" type="tel" value="<?php echo $telefone ?>" name="telefone" placeholder="" onkeyup="handlePhone(event)"/>          
         </div>
         <div class = borda>
           <h4>E-mail:</h4>
-          <input id="email" type="email" name="digitar" id="idigitar" placeholder="" />
+          <input id="email" type="email" value="<?php echo $email ?>" name="email" placeholder="" />
         </div>
         <div class = borda>
           <h4>Data de nascimento:</h4>
-          <input type="date" id="date" />
+          <input type="date" id="date" value="<?php echo $dt_nasc ?>" name="dt_nasc" />
         </div>
         <!-- <div class = borda>
         <h4>Endereço:</h4> 
-          <input id="text" type="text" name="digitar" id="idigitar" placeholder="" required/>            </div> -->
-        </div>
+          <input type="text"  name="digitar" id="digitar" placeholder="" required/>
+        </div> -->
         <div class = borda>
           <h4>Senha:</h4>
-          <input type="password" id="password"/>
+          <input type="password" value="<?php echo $senha ?>" id="senha" name="senha"/>
         </div>
         <!-- <div id="checkbox"> 
           <input type="checkbox"/>
@@ -97,7 +117,7 @@
       <img src="img/img5.png" alt="figura ilustrativa de uma pessoa acessando dados privados."/>
     </figure>
     <div class = "botao" >
-    <a href = "perfil.html">
+    <a href = "editar_post.php">
     <input id="enviar" type="submit" value="Salvar informações" style="margin-bottom: 0; margin-left: 5em;"/>
     </a>
     </div>

@@ -1,3 +1,18 @@
+<?php
+include ('conex.php');
+
+if(isset($_GET['id_consulta'])){
+$query = "SELECT * FROM consulta WHERE id_consulta='".$_GET['id_consulta']."'";}
+else die("Não foi possível encontrar a consulta");
+
+$resultado = mysqli_query($db, $query) or die(mysqli_error($db));
+while($obj = mysqli_fetch_assoc($resultado)){
+$cpf_medico = $obj['cpf_medico'];
+$cpf_paciente = $obj['cpf_paciente'];
+$dt_consulta = $obj['dt_consulta'];
+$id_consulta = $obj['id_consulta'];}
+?>
+
 <!DOCTYPE html>
 <html lang = "pt-br">
 <head>
@@ -50,31 +65,47 @@
       <nav id = "menu">
         <ul>
           <li><a href = "index.html">Início</a></li>
-          <li><a href = "login.html">Login</a></li>
-          <li><a href = "cadastro.html">Cadastro</a></li>
+          <li><a href = "agendamento.php">Agendar</a></li>
+          <li><a href = "consultas.php">Ver consultas</a></li>
         </ul>
         </nav>
 </header>
 <main>
     <section id = "cadastro">
-       <form action = "verconsulta.html">
+       <form action = "alterardados_post.php" method="post">
       <h2>Editar informações</h2>
+	<div hidden class= borda>
+		<input oninput="mascara(this)" value="<?php echo $_GET['id_consulta']; ?>" name="id_consulta" id="id_consulta" type="text"/>
+	</div>
          <div class = borda>
            <h4>CPF do paciente:</h4>
-               <input oninput="mascara(this)" id="cpf" placeholder="" type="text">
+               <input oninput="mascara(this)" value="<?php echo $cpf_paciente ?>" name="cpf_paciente" id="cpf_paciente" type="text">
          </div>
          <div class = borda>
-           <h4>CPF do médico:</h4>
-               <input oninput="mascara(this)" id="cpf" placeholder=""  type="text">
+           <h4>Médico:</h4>
+               <select name="cpf_medico" id="cpf_medico">
+		<?php
+		$query = 'SELECT * FROM medico';
+		$result = mysqli_query($db, $query) or die (mysqli_error($db));
+		while ($row = mysqli_fetch_assoc($result)) {
+		if ($row['cpf'] == $cpf_medico) {
+		echo '<option value="'.$row['cpf'].'">'.$row['nome'].'</option>';
+		}}
+		$res = mysqli_query($db, $query) or die (mysqli_error($db));
+		while ($row = mysqli_fetch_assoc($res)) {
+		if ($row['cpf'] !== $cpf_medico) {
+		echo '<option value="'.$row['cpf'].'">'.$row['nome'].' ('.$row['especialidade'].')</option>';
+		}} ?>
+	       </select>
          </div>
          <div class = borda>
-           <h4>Selecione o dia da consulta:</h4>
-           <input type="date" id="date"/>
+           <h4>Dia da consulta:</h4>
+           <input type="date" value="<?php echo $dt_consulta ?>" id="dt_consulta" name="dt_consulta"/>
          </div>
          <!-- <div class = borda>
            <h4>Registre o dia do agendamento:</h4>
            <input type="date" id="date" required/>
-         </div> -->
+         </div>
          <div class = borda>
            <h4>Selecione a hora da consulta:</h4>
            <select>
@@ -87,14 +118,14 @@
              <option value="hora">16:30h</option>
              <option value="hora">17:30h</option>
            </select>
-         </div>
+         </div>-->
     </section>
     <section>
     <figure class="img">
       <img src="img/img6.png" alt="figura ilustrativa de uma pessoa acessando dados privados."/>
     </figure>
-    <div class = "botao"  style="margin-left: 0;">
-    <a href = "perfil.html">
+    <div class = "botao" >
+    <a href = "alterardados_post.php">
     <input id="enviar" type="submit" value="Salvar informações" style="margin-bottom: 0; margin-left: 5em;"/>
     </a>
     </div>
